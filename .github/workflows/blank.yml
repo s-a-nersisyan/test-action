@@ -1,0 +1,36 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python package
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest]
+        python-version: ["3.11"]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        echo "This is macOS!"
+        brew install gcc pkg-config tbb
+        export CXX=$(ls $(brew --prefix gcc)/bin/g++-* | sort -rn | head -n 1)
+        pip install parallel_sort==0.2.0
+      shell: bash
+    - name: Test with python
+      run: python3 -c "import parallel_sort; import numpy as np; print(parallel_sort.sort(np.array([3,2,1])))"
