@@ -33,4 +33,7 @@ jobs:
         pip install parallel_sort==0.2.0
       shell: bash
     - name: Test with python
-      run: python3 -c "import parallel_sort; import numpy as np; print(parallel_sort.sort(np.array([3,2,1])))"
+      run: |
+        pip --version
+        python3 --version
+        python3 -c "import parallel_sort; import numpy as np; print(parallel_sort.sort(np.array([3,2,1])))"
