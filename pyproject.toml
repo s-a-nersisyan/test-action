@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "cmctest"
+version = "2.17.0"
+description = "Test GitHub actions push to PyPI"
+license = "GPL-3.0-only"
+authors = [
+    "Stepan Nersisyan <Stepan.Nersisyan@jefferson.edu>"
+]
+readme = "README.md"
+repository = "https://github.com/s-a-nersisyan/test-action"
+documentation = "https://github.com/s-a-nersisyan/test-action"
+packages = [{include = "cmctest"}]
+
+[tool.poetry.dependencies]
+python = ">= 3.10, < 3.12"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
